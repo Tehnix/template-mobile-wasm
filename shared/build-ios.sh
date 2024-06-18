@@ -23,12 +23,12 @@ else
   echo "Changes detected, building... ($CURRENT_HASH != $NEW_HASH)"
 fi
 
-# Build the dylib.
+# Build the library.
 cargo build
 
 # Generate the Swift bindings, headers, and modulemap.
-rm -rf "bindings"
-cargo run --bin uniffi-bindgen generate --library ./target/debug/libshared.dylib --language swift --out-dir ./bindings
+rm -rf "bindings" || echo "No bindings directory to remove."
+cargo run --bin uniffi-bindgen generate --library ./target/debug/libshared.a --language swift --out-dir ./bindings
 
 # Build the library for each target.
 # Optional targets:
@@ -48,7 +48,7 @@ done
 mv "./bindings/sharedFFI.modulemap" "./bindings/module.modulemap"
 
 # Recreate the XCFramework.
-rm -rf "ios/Shared.xcframework"
+rm -rf "ios/Shared.xcframework" || echo "No XCFramework to remove."
 xcodebuild -create-xcframework \
   -library ./target/aarch64-apple-ios-sim/release/libshared.a -headers ./bindings \
   -library ./target/aarch64-apple-ios/release/libshared.a -headers ./bindings \
@@ -57,9 +57,9 @@ xcodebuild -create-xcframework \
 
 # Finally, copy the Swift bindings into the XCode project which also updates the
 # checksums in XCode.
-rm -rf "$IOS_PROJECT/Generated/Shared.xcframework"
+rm -rf "$IOS_PROJECT/Generated/Shared.xcframework" || echo "No XCFramework to remove."
 cp -r "ios/Shared.xcframework" "$IOS_PROJECT/Generated/Shared.xcframework"
-rm -rf "$IOS_PROJECT/Generated/shared.swift"
+rm -rf "$IOS_PROJECT/Generated/shared.swift" || echo "No shared.swift to remove."
 cp "bindings/shared.swift" "$IOS_PROJECT/Generated/shared.swift"
 
 # Done! No more steps since ./ios/Shared.xcframework and ./bindings/shared.swift are
