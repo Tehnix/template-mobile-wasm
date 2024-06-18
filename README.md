@@ -8,6 +8,24 @@ After exploring multiple solutions to working with Rust on Mobile, this seems so
 - Use Rust code from Swift via [UniFFI](https://github.com/mozilla/uniffi-rs)
 
 
+In short, construct the shared code for all platforms (iOS, macOS, watchOS):
+
+```bash
+cd shared && ./build-ios.sh
+```
+
+Change the Leptos/WASM/Rust app and build the artifacts:
+
+```bash
+cd appy && trunk build
+```
+
+Sync the changes over with Capacitor and run it in a Simulator:
+
+```bash
+cd appy && bunx cap sync && bunx cap run ios
+```
+
 ## Setting up Capacitor
 
 Then dependencies are setup in package.json, but otherwise they are:

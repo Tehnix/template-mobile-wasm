@@ -37,11 +37,13 @@ struct AppWidgetsEntryView: View {
 
   var body: some View {
     VStack {
+      // Calling the `eatFruit` function and `Fruits` enum
+      // exposed from Rust.
       Text("Ready? \(eatFruit(fruit: Fruits.watermelon))")
         .font(.headline)
-      
+
       Spacer()
-      
+
       HStack {
         Text("Time:")
         Text(self.entry.date, style: .time)
