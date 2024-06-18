@@ -1,0 +1,19 @@
+{
+  "name": "end2end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "playwright install",
+    "e2e": "playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bun-types": "latest",
+    "@types/node": "^20.5.0",
+    "typescript": "^5",
+    "@playwright/test": "^1.38.1"
+  }
+}

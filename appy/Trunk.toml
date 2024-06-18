@@ -1,0 +1,7 @@
+[[hooks]]
+stage = "pre_build"
+command = "sh"
+command_arguments = [
+  "-c",
+  "bunx tailwindcss --input resources/input.css --output public/output.css",
+]

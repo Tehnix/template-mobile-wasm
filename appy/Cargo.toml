@@ -1,0 +1,37 @@
+[package]
+name = "ui-internal"
+version = "0.1.0"
+edition = "2021"
+
+# Define our supported locales.
+[package.metadata.leptos-i18n]
+default = "en"
+locales = ["en", "fr"]
+locales-dir = "./messages"
+
+# Optimize for WASM binary size:
+# - https://doc.rust-lang.org/cargo/reference/profiles.html#default-profiles
+# - https://github.com/johnthagen/min-sized-rust
+[profile.release]
+opt-level = 'z'   # Optimize for size.
+lto = true        # Enable Link Time Optimization.
+codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization.
+strip = true      # Automatically strip symbols from the binary.
+debug = false
+
+[dependencies]
+# Core leptos library.
+leptos = { version = "0.5.1", features = ["csr", "nightly"] }
+# Leptos Meta adds support for adjusting <head> from within components.
+leptos_meta = { version = "0.5.1", features = ["csr", "nightly"] }
+# Router and Route state management.
+leptos_router = { version = "0.5.1", features = ["csr", "nightly"] }
+# Leptos support for i18n localization.
+leptos_i18n = { version = "0.2", features = ["csr", "nightly"] }
+# Lightweight logging support.
+log = "0.4"
+
+# Common WASM libraries.
+wasm-bindgen = { version = "0.2" }
+console_log = { version = "1" }
+console_error_panic_hook = { version = "0.1" }

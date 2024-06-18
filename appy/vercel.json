@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "public": false,
+  "framework": null,
+  "buildCommand": "",
+  "outputDirectory": "dist",
+  "installCommand": "",
+  "git": {
+    "deploymentEnabled": {
+      "main": false
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}

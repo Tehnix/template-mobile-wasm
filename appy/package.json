@@ -1,0 +1,16 @@
+{
+  "name": "appy",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.0",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.0",
+    "@capacitor/ios": "^6.1.0"
+  }
+}
