@@ -37,22 +37,14 @@ struct AppWidgetsEntryView: View {
 
   var body: some View {
     VStack {
+      Spacer()
+      Text("🍽️")
+        .font(.title)
+      Spacer()
       // Calling the `eatFruit` function and `Fruits` enum
       // exposed from Rust.
       Text("Ready? \(eatFruit(fruit: Fruits.watermelon))")
         .font(.headline)
-
-      Spacer()
-
-      HStack {
-        Text("Time:")
-        Text(self.entry.date, style: .time)
-      }
-
-      HStack {
-        Text("Emoji:")
-        Text(self.entry.emoji)
-      }
       Spacer()
     }
   }
@@ -81,5 +73,5 @@ struct AppWidgets: Widget {
   AppWidgets()
 } timeline: {
   SimpleEntry(date: .now, emoji: "😀")
-  SimpleEntry(date: .now, emoji: "🤩")
+//  SimpleEntry(date: .now, emoji: "🤩")
 }

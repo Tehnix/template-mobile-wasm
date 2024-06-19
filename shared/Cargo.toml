@@ -3,19 +3,6 @@ name = "shared"
 version = "0.1.0"
 edition = "2021"
 
-[lib]
-crate-type = [ "staticlib" ]
-name = "shared"
-
-[[bin]]
-name = "uniffi-bindgen"
-path = "src/bin/uniffi-bindgen.rs"
-
-# Reduce the binary size.
-[profile.release]
-lto = "fat"
-panic = "abort"
-strip = true
-
 [dependencies]
-uniffi = { version = "0.28.0", features = [ "cli" ] }
+# UniFFI dependencies for generating Swift bindings.
+uniffi = { version = "0.28.0", features = ["cli"] }

@@ -422,7 +422,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../../../shared/build-ios.sh\n";
+			shellScript = "../../../mobile/build-ios.sh\n";
 		};
 		A7D55E782C21B856007B93AD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -440,7 +440,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../../../shared/build-ios.sh\n";
+			shellScript = "../../../mobile/build-ios.sh\n";
 		};
 		A7D55E972C21C3C9007B93AD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -458,7 +458,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../../../shared/build-ios.sh\n";
+			shellScript = "../../../mobile/build-ios.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

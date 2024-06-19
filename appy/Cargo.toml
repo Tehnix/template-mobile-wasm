@@ -1,5 +1,5 @@
 [package]
-name = "ui-internal"
+name = "appy"
 version = "0.1.0"
 edition = "2021"
 
@@ -20,18 +20,22 @@ strip = true      # Automatically strip symbols from the binary.
 debug = false
 
 [dependencies]
+# Our local dependencies (NOTE: we don't need the path since it's patched in).
+shared = { version = "0.1.0" }
+
 # Core leptos library.
-leptos = { version = "0.5.1", features = ["csr", "nightly"] }
+leptos = { version = "0.6.12", features = ["csr", "nightly"] }
 # Leptos Meta adds support for adjusting <head> from within components.
-leptos_meta = { version = "0.5.1", features = ["csr", "nightly"] }
+leptos_meta = { version = "0.6.12", features = ["csr", "nightly"] }
 # Router and Route state management.
-leptos_router = { version = "0.5.1", features = ["csr", "nightly"] }
+leptos_router = { version = "0.6.12", features = ["csr", "nightly"] }
 # Leptos support for i18n localization.
-leptos_i18n = { version = "0.2", features = ["csr", "nightly"] }
+leptos_i18n = { version = "0.3.3", features = ["csr", "nightly"] }
 # Lightweight logging support.
 log = "0.4"
 
 # Common WASM libraries.
-wasm-bindgen = { version = "0.2" }
 console_log = { version = "1" }
 console_error_panic_hook = { version = "0.1" }
+# Match Trunk's wasm-bindgen version for compatability.
+wasm-bindgen = { version = "=0.2.87" }

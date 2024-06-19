@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A7D55E822C21C377007B93AD"
-               BuildableName = "Companion Watch App.app"
+               BuildableName = "Appy.app"
                BlueprintName = "Companion Watch App"
                ReferencedContainer = "container:App.xcodeproj">
             </BuildableReference>

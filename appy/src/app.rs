@@ -13,6 +13,7 @@ pub struct LayoutParams {
 }
 
 #[component(transparent)]
+#[allow(non_snake_case)]
 fn LocalizedRoute<P, F, IV>(path: P, view: F) -> impl IntoView
 where
     P: std::fmt::Display,
@@ -48,6 +49,7 @@ where
 }
 
 #[component]
+#[allow(non_snake_case)]
 pub fn Layout() -> impl IntoView {
     provide_meta_context();
     provide_i18n_context();

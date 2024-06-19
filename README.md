@@ -11,24 +11,30 @@ After exploring multiple solutions to working with Rust on Mobile, this seems so
 In short, construct the shared code for all platforms (iOS, macOS, watchOS):
 
 ```bash
-cd shared && ./build-ios.sh
+just build-shared
 ```
 
-Change the Leptos/WASM/Rust app and build the artifacts:
+Change the Leptos/WASM/Rust app, build the artifacts, and sync the changes with Capacitor:
 
 ```bash
-cd appy && trunk build
+just build-web
 ```
 
-Sync the changes over with Capacitor and run it in a Simulator:
+Run it in a Simulator:
 
 ```bash
-cd appy && bunx cap sync && bunx cap run ios
+just run
 ```
 
-## Setting up Capacitor
+Or open XCode
 
-Then dependencies are setup in package.json, but otherwise they are:
+```bash
+just open
+```
+
+## Setting up Capacitor from scratch
+
+Then dependencies are setup in `appy/package.json`, but otherwise they are:
 
 ```bash
 bun install @capacitor/core
@@ -36,7 +42,7 @@ bun install --dev @capacitor/cli
 bun install @capacitor/ios
 ```
 
-We first initialize Capacitor in our project:
+We then initialize Capacitor in our project:
 
 ```bash
 bunx cap init
@@ -56,15 +62,15 @@ bunx cap sync
 
 And finally either open the XCode project `bunx cap ios open` or run it directly in the Simulator via `bunx cap ios run`.
 
-## Setting up UniFFI
+## Setting up UniFFI from scratch
 
-While everything is handled by the `./build-ios.sh` script it might be nice to get an overview of what's going on (if you're doing this yourself from scratch, I recommend [this post](https://forgen.tech/en/blog/post/building-an-ios-app-with-rust-using-uniffi)).
+While everything is handled by the `./mobile/build-ios.sh` script it might be nice to get an overview of what's going on (if you're doing this yourself from scratch, I recommend [this post](https://forgen.tech/en/blog/post/building-an-ios-app-with-rust-using-uniffi)).
 
 We first build the binary for generating our bindings, and then use that to generate our bindings:
 
 ```bash
 cargo build
-cargo run --bin uniffi-bindgen generate --library ./target/debug/libshared.dylib --language swift --out-dir ./bindings
+cargo run --bin uniffi-bindgen generate --library ./target/debug/libmobile.a --language swift --out-dir ./bindings
 ```
 
 We also need to rename the FFI to module.modulemap so that XCFramework will work:
@@ -102,6 +108,6 @@ xcodebuild -create-xcframework \
         -output "ios/Shared.xcframework"
 ```
 
-Done! 
+Done!
 
 As the final step we drag-n-drop ./ios/Shared.xcframework and ./bindings/shared.swift into the XCode project.

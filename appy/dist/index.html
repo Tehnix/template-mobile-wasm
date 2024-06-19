@@ -1,14 +1,26 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module">import init from '/ui-internal-1bee91abb4660234.js';init('/ui-internal-1bee91abb4660234_bg.wasm');</script>
-    <link rel="icon" href="/favicon-7d029eeef082d8c.ico">
-    <link rel="stylesheet" href="/output-aa002dfc61e3036c.css">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+<script type="module" nonce="ueQ3VBWUS9pDkwdmd85YhA==">
+import init, * as bindings from '/appy-949c4a781abd5457.js';
+const wasm = await init('/appy-949c4a781abd5457_bg.wasm');
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+    <link rel="icon" href="/favicon-7d029eeef082d8c.ico" integrity="sha384&#x2D;sgr1J67yMr&#x2F;&#x2F;xRQ2&#x2B;ZhU4qv36XintdoLXKi9OE5NjPv3OEF50c4plFw&#x2F;7qE&#x2F;VNns"/>
+    <link rel="stylesheet" href="/output-5b654deef90cd5e2.css" integrity="sha384&#x2D;MBQh8r4fgBF7gTN62e0KH8BcnDhCJt0xTF3P1hwqMRA8SBRrcqRRv&#x2F;28vrXjgJSy"/>
     <title>Hello, World!</title>
   
-<link rel="preload" href="/ui-internal-1bee91abb4660234_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/ui-internal-1bee91abb4660234.js"></head>
+<link rel="modulepreload" href="/appy-949c4a781abd5457.js" crossorigin=anonymous integrity="sha384-dv0X0F9/S6ufWwPlUpUIQhfGpXqbGX96mlBzA2O0vaLVUOgmZXxLqXyAHWnx0/wC">
+<link rel="preload" href="/appy-949c4a781abd5457_bg.wasm" crossorigin=anonymous integrity="sha384-I/a9LPIG4HOVvlN9Dmwr9H5KJDLVGbSLJw5od/VfYcLjYI077DoH1+LEDKTgZ9q6" as="fetch" type="application/wasm"></head>
 
-  <body>
-
-</body></html>
+  <body></body>
+</html>

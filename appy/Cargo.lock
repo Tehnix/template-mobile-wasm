@@ -44,6 +44,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a4668cab20f66d8d020e1fbc0ebe47217433c1b6c8f2040faf858554e394ace6"
 
 [[package]]
+name = "appy"
+version = "0.1.0"
+dependencies = [
+ "console_error_panic_hook",
+ "console_log",
+ "leptos",
+ "leptos_i18n",
+ "leptos_meta",
+ "leptos_router",
+ "log",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "async-recursion"
 version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1820,20 +1834,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.38",
-]
-
-[[package]]
-name = "ui-internal"
-version = "0.1.0"
-dependencies = [
- "console_error_panic_hook",
- "console_log",
- "leptos",
- "leptos_i18n",
- "leptos_meta",
- "leptos_router",
- "log",
- "wasm-bindgen",
 ]
 
 [[package]]

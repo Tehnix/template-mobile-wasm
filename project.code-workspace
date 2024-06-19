@@ -1,0 +1,76 @@
+{
+  "folders": [
+    {
+      "name": "project",
+      "path": "."
+    },
+    {
+      "name": "appy",
+      "path": "appy"
+    },
+    {
+      "name": "shared",
+      "path": "shared"
+    },
+    {
+      "name": "mobile",
+      "path": "mobile"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/target": true,
+      "**/node_modules": true,
+      "**/Cargo.lock": true,
+      "**/dist": true,
+      "**/.vscode": false,
+      ".github": true,
+      "appy": true,
+      "shared": true,
+      "mobile": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/bower_components": true,
+      "**/*.code-search": true,
+      "**/.ruby-lsp": true,
+      "deployment/artifacts": true,
+      "dist": true
+    },
+    "editor.formatOnSave": true,
+    "rust-analyzer.procMacro.ignored": {
+      "leptos_macro": ["server", "component"]
+    },
+    "rust-analyzer.cargo.features": [],
+    "emmet.includeLanguages": {
+      "rust": "html",
+      "*.rs": "html"
+    },
+    "tailwindCSS.includeLanguages": {
+      "rust": "html",
+      "*.rs": "html"
+    },
+    "files.associations": {
+      "*.rs": "rust"
+    },
+    "editor.quickSuggestions": {
+      "other": "on",
+      "comments": "on",
+      "strings": true
+    },
+    "css.validate": false
+  },
+  "extensions": {
+    "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "rust-lang.rust-analyzer",
+      "skellock.just"
+    ]
+  }
+}

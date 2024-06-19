@@ -566,10 +566,6 @@ video {
   height: 100vh;
 }
 
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
 .place-content-center {
   place-content: center;
 }
@@ -578,8 +574,12 @@ video {
   align-content: center;
 }
 
-.gap-4 {
-  gap: 1rem;
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .text-6xl {

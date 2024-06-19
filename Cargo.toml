@@ -1,0 +1,12 @@
+[workspace]
+members = ["appy"]
+edition = "2021"
+resolver = "2"
+# Ignore the mobile crate which is only used to generate bindings to Swift, and
+# the shared crate which is shared between both.
+exclude = ["mobile", "shared"]
+
+[patch.crates-io]
+# We patch in our shared code to allow it to live independently of the appy crate
+# allowing us to pull in only the shared code in the mobile crate.
+shared = { path = "./shared" }

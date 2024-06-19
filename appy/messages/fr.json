@@ -1,5 +1,7 @@
 {
   "home": {
-    "intro": "Bienvenue!"
+    "intro": "Bienvenue!",
+    "emoji": "🥐️",
+    "ready": "Prêt?"
   }
 }

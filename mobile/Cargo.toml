@@ -1,0 +1,32 @@
+[package]
+name = "mobile"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
+name = "mobile"
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
+
+[profile.release]
+opt-level = 'z' # Optimize for size.
+lto = true      # Enable Link Time Optimization.
+strip = true    # Automatically strip symbols from the binary.
+panic = "abort"
+debug = false
+# codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization.
+
+[patch.crates-io]
+# We patch in our shared code to allow it to live independently of the appy crate
+# allowing us to pull in only the shared code in the mobile crate.
+shared = { path = "../shared" }
+
+[dependencies]
+# Our local dependencies (NOTE: we don't need the path since it's patched in).
+shared = { version = "0.1.0" }
+
+# UniFFI dependencies for generating Swift bindings.
+uniffi = { version = "0.28.0", features = ["cli"] }
