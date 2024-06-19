@@ -79,35 +79,88 @@ We also need to rename the FFI to module.modulemap so that XCFramework will work
 mv ./bindings/sharedFFI.modulemap ./bindings/module.modulemap
 ```
 
-Now, let's add support for iOS and the Simulator:
+Now, let's add support for iOS, the Simulator and macOS:
 
 ```bash
-rustup target add aarch64-apple-ios # for iOS
-rustup target add aarch64-apple-ios-sim # for M1 Mac simulators
+rustup target add aarch64-apple-darwin
+rustup target add aarch64-apple-ios
+rustup target add aarch64-apple-ios-sim
+rustup target add x86_64-apple-ios # iOS simulator, also needed on Arm Macs.
 ```
 
-If you're on Intel instead use:
+and then build for our targets:
 
 ```bash
-rustup target add x86_64-apple-ios # for Intel Mac simulators
+carbo build --release --target=aarch64-apple-darwin
+carbo build --release --target=aarch64-apple-ios
+carbo build --release --target=aarch64-apple-ios-sim
+carbo build --release --target=x86_64-apple-ios
 ```
 
-and then build for the iOS target:
+We'll combine `x86_64-apple-ios` and `aarch64-apple-ios-sim` into a single binary later on, but for now we keep them separate.
+
+If we want watchOS we need to handle things a bit differently, since these are Tier 3 targets (i.e. Rustup won't have their stdlib):
 
 ```bash
-cargo build --release --target=aarch64-apple-ios-sim
-cargo build --release --target=aarch64-apple-ios
+cargo +nightly build -Zbuild-std=std,panic_abort --release --target=aarch64-apple-watchos-sim
+cargo +nightly build -Zbuild-std=std,panic_abort --release --target=x86_64-apple-watchos-sim
+cargo +nightly build -Zbuild-std=std,panic_abort --release --target=aarch64-apple-watchos
+cargo +nightly build -Zbuild-std=std,panic_abort --release --target=armv7k-apple-watchos
+cargo +nightly build -Zbuild-std=std,panic_abort --release --target=arm64_32-apple-watchos
+```
+
+That's a lot of targets, which represent all the various Watch models, as well as the simulators (we alywas need both ARM and X86).
+
+`xcodebuild` won't be happy if we just drop them in individually, so we need to create a fat binary:
+
+```bash
+# Combine the watchOS simulator libraries into a single file using lipo.
+mkdir -p target/watchOS-sim/release
+lipo -create target/aarch64-apple-watchos-sim/release/libmobile.a \
+target/x86_64-apple-watchos-sim/release/libmobile.a \
+        -o target/watchOS-sim/release/libmobile.a
+# Confirm the architectures.
+lipo -info target/watchOS-sim/release/libmobile.a
+
+# Combine the watchOS libraries into a single file using lipo.
+mkdir -p target/watchOS/release
+lipo -create target/aarch64-apple-watchos/release/libmobile.a \
+        target/arm64_32-apple-watchos/release/libmobile.a \
+        target/armv7k-apple-watchos/release/libmobile.a \
+        -o target/watchOS/release/libmobile.a
+# Confirm the architectures.
+lipo -info target/watchOS/release/libmobile.a
 ```
 
 We can then create our XCFramework:
 
 ```bash
 xcodebuild -create-xcframework \
-        -library ./target/aarch64-apple-ios-sim/release/libshared.a -headers ./bindings \
-        -library ./target/aarch64-apple-ios/release/libshared.a -headers ./bindings \
-        -output "ios/Shared.xcframework"
+    -library ./target/aarch64-apple-ios-sim/release/libmobile.a -headers ./bindings \
+    -library ./target/aarch64-apple-ios/release/libmobile.a -headers ./bindings \
+    -library ./target/aarch64-apple-darwin/release/libmobile.a -headers ./bindings \
+    -library ./target/watchOS-sim/release/libmobile.a -headers ./bindings \
+    -library ./target/watchOS/release/libmobile.a -headers ./bindings \
+    -output "ios/Shared.xcframework"
+```
+
+And finally, we'll combine `x86_64-apple-ios` and `aarch64-apple-ios-sim` into a single binary. If we included both of these in the XCFramework, `xcodebuild` would complain that these are the same, and not generate our XCFramework file. Oddly enough, it will not be able to build the project without both, so we let `xcodebuild` build the project, and then replace the binary with the fat binary:
+
+```bash
+# We need to combine the architectures for the iOS Simulator libraries after we've
+# constructed the XCFramework, otherwise it will complain about them being the same,
+# while also failing because of missing x86_64 if we omit it.
+mkdir -p target/iOS-sim/release
+lipo -create target/aarch64-apple-ios-sim/release/libmobile.a \
+  target/x86_64-apple-ios/release/libmobile.a \
+  -o target/iOS-sim/release/libmobile.a
+# Confirm the architectures.
+lipo -info target/iOS-sim/release/libmobile.a
+# Move it into place.
+rm ios/Shared.xcframework/ios-arm64-simulator/libmobile.a
+cp target/iOS-sim/release/libmobile.a ios/Shared.xcframework/ios-arm64-simulator/libmobile.a
 ```
 
 Done!
 
-As the final step we drag-n-drop ./ios/Shared.xcframework and ./bindings/shared.swift into the XCode project.
+As the final step we drag-n-drop ./ios/Shared.xcframework and ./bindings/shared.swift into the XCode project whereever you want them. I personally like to create a new group (folder) called `Generated` for them (the `build-ios.sh` script assumes that's the case).
