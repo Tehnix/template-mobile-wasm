@@ -79,7 +79,7 @@ We also need to rename the FFI to module.modulemap so that XCFramework will work
 mv ./bindings/sharedFFI.modulemap ./bindings/module.modulemap
 ```
 
-Now, let's add support for iOS, the Simulator and macOS:
+Now, let's add support for iOS, the Simulator and macOS via rustup:
 
 ```bash
 rustup target add aarch64-apple-darwin
@@ -88,7 +88,7 @@ rustup target add aarch64-apple-ios-sim
 rustup target add x86_64-apple-ios # iOS simulator, also needed on Arm Macs.
 ```
 
-and then build for our targets:
+and then build the library for all of our targets:
 
 ```bash
 carbo build --release --target=aarch64-apple-darwin
@@ -109,7 +109,7 @@ cargo +nightly build -Zbuild-std=std,panic_abort --release --target=armv7k-apple
 cargo +nightly build -Zbuild-std=std,panic_abort --release --target=arm64_32-apple-watchos
 ```
 
-That's a lot of targets, which represent all the various Watch models, as well as the simulators (we alywas need both ARM and X86).
+That's a lot of targets, which represent all the various Watch models, as well as the simulators (we always need both ARM and x86).
 
 `xcodebuild` won't be happy if we just drop them in individually, so we need to create a fat binary:
 
@@ -144,7 +144,7 @@ xcodebuild -create-xcframework \
     -output "ios/Shared.xcframework"
 ```
 
-And finally, we'll combine `x86_64-apple-ios` and `aarch64-apple-ios-sim` into a single binary. If we included both of these in the XCFramework, `xcodebuild` would complain that these are the same, and not generate our XCFramework file. Oddly enough, it will not be able to build the project without both, so we let `xcodebuild` build the project, and then replace the binary with the fat binary:
+And finally, we'll combine `x86_64-apple-ios` and `aarch64-apple-ios-sim` into a single binary. If we included both of these in the XCFramework, `xcodebuild` would complain that these are the same, and not generate our XCFramework file. Oddly enough, it will not be able to build the project without both, so we let `xcodebuild` generate the XCFramework first, and then replace the binary with the fat binary:
 
 ```bash
 # We need to combine the architectures for the iOS Simulator libraries after we've
