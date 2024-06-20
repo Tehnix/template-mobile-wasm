@@ -27,12 +27,15 @@ install-tooling:
   cd appy && bun install
   # Install test dependencies.
   cd appy/end2end && bun install
+  @ echo "\n\nIf you don't have it already, you need to install Xcode and Android Studio for the Mobile Apps."
+  @ echo "  - Xcode: https://developer.apple.com/xcode/"
+  @ echo "  - Android Studio: https://developer.android.com/studio"
 
 # Open the VS Code project workspace.
 code:
   open project.code-workspace
 
-# Open our Mobile project in XCode. Platform can be "ios" or "android" (default "ios").
+# Open our Mobile project in Xcode. Platform can be "ios" or "android" (default "ios").
 open platform="ios":
   cd appy && bunx cap open {{ platform }}
 

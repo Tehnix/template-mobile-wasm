@@ -4,7 +4,7 @@ After exploring multiple solutions to working with Rust on Mobile, this seems so
 
 - Compile to WASM via Rust and a framework such as Leptos
 - Package WASM using [Capacitor](https://capacitorjs.com/docs)
-- Support native Widgets using the generated XCode project and Swift
+- Support native Widgets using the generated Xcode project and Swift
 - Use Rust code from Swift via [UniFFI](https://github.com/mozilla/uniffi-rs)
 
 We use [just](https://github.com/casey/just) to setup various commands in the `justfile` (`brew install just` to install it).
@@ -20,7 +20,7 @@ Available recipes:
     dev port="8080"      # Run the local Web Development server on the port.
     help                 # Display help information.
     install-tooling      # Setup the tooling needed for the project.
-    open platform="ios"  # Open our Mobile project in XCode. Platform can be "ios" or "android" (default "ios").
+    open platform="ios"  # Open our Mobile project in Xcode. Platform can be "ios" or "android" (default "ios").
     run platform="ios"   # Run our Mobile App in a Simulator. Platform can be "ios" or "android" (default "ios").
     sync                 # Only sync the code to our Mobile Apps and update it.
     test +tests=""       # Run end-to-end tests. Tests can be omitted for all, or a specific test name (default "").
@@ -59,7 +59,7 @@ Run it in a Simulator:
 just run # or: just run android
 ```
 
-Or open XCode
+Or open Xcode
 
 ```bash
 just open # or: just open android
@@ -87,13 +87,13 @@ Then we can setup the iOS project:
 bunx cap add ios
 ```
 
-After we've built our WASM files into `dist/` we can sync them over to the XCode project:
+After we've built our WASM files into `dist/` we can sync them over to the Xcode project:
 
 ```bash
 bunx cap sync
 ```
 
-And finally either open the XCode project `bunx cap ios open` or run it directly in the Simulator via `bunx cap ios run`.
+And finally either open the Xcode project `bunx cap ios open` or run it directly in the Simulator via `bunx cap ios run`.
 
 ## Setting up UniFFI from scratch
 
@@ -196,4 +196,4 @@ cp target/iOS-sim/release/libmobile.a ios/Shared.xcframework/ios-arm64-simulator
 
 Done!
 
-As the final step we drag-n-drop ./ios/Shared.xcframework and ./bindings/shared.swift into the XCode project whereever you want them. I personally like to create a new group (folder) called `Generated` for them (the `build-ios.sh` script assumes that's the case).
+As the final step we drag-n-drop ./ios/Shared.xcframework and ./bindings/shared.swift into the Xcode project whereever you want them. I personally like to create a new group (folder) called `Generated` for them (the `build-ios.sh` script assumes that's the case).

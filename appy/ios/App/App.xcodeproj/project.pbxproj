@@ -652,7 +652,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
-				PRODUCT_BUNDLE_IDENTIFIER = io.codetalk.appy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.appy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -679,7 +679,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.codetalk.appy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.appy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -719,7 +719,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.codetalk.appy.AppWidgets;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.appy.AppWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -760,7 +760,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.codetalk.appy.AppWidgets;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.appy.AppWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -802,7 +802,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.codetalk.appy.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.appy.watchkitapp;
 				PRODUCT_NAME = Appy;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -843,7 +843,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.codetalk.appy.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.appy.watchkitapp;
 				PRODUCT_NAME = Appy;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
