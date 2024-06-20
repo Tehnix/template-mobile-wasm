@@ -10,9 +10,9 @@ help:
 # Setup the tooling needed for the project.
 install-tooling:
   # Install bun for managing JS dependencies.
-  curl -fsSL https://bun.sh/install | bash
+  command -v bun >/dev/null 2>&1 || curl -fsSL https://bun.sh/install | bash
   # Install Rust and Cargo.
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  command -v rustup >/dev/null 2>&1 || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   # Install cargo-binstall for installing binaries from crates.io.
   command -v cargo-binstall >/dev/null 2>&1 || curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
   # Install trunk for building Rust WebAssembly.
@@ -21,6 +21,8 @@ install-tooling:
   command -v leptosfmt >/dev/null 2>&1 || cargo binstall --no-confirm leptosfmt
   # Install cargo-edit for managing dependencies.
   command -v cargo-add >/dev/null 2>&1 || cargo binstall --no-confirm cargo-edit
+  # Install cargo-watch for rerunning scripts on changes.
+  command -v cargo-watch >/dev/null 2>&1 || cargo binstall --no-confirm cargo-watch
   # Install dependencies.
   cd appy && bun install
   # Install test dependencies.
@@ -30,19 +32,28 @@ install-tooling:
 code:
   open project.code-workspace
 
-# Open our Mobile project in XCode.
-open:
-  cd appy && bunx cap open ios
+# Open our Mobile project in XCode. Platform can be "ios" or "android" (default "ios").
+open platform="ios":
+  cd appy && bunx cap open {{ platform }}
 
-# Run the local Web Development server.
-dev:
-  cd appy && trunk serve
+# Run the local Web Development server on the port.
+dev port="8080":
+  cd appy && trunk serve --port {{ port }}
 
-# Run our Mobile App in a Simulator.
-run:
-  cd appy && bunx cap run ios
+# Run our Mobile App in a Simulator. Platform can be "ios" or "android" (default "ios").
+run platform="ios":
+  cd appy && bunx cap run {{ platform }}
 
-# Build our Web App and sync the code to our Mobile Apps.
+# Run end-to-end tests. Tests can be omitted for all, or a specific test name (default "").
+test +tests="":
+  cd appy/end2end && bun run e2e {{ tests }}
+
+# Build our Web App, Shared code, and sync the changes to our Mobile Apps.
+just build:
+  @ just build-web
+  @ just build-shared
+
+# Only build our Web App and sync the code to our Mobile Apps.
 build-web:
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -52,7 +63,7 @@ build-web:
   # Sync the files to our Mobile projects.
   bunx cap sync
 
-# Generate the Swift bindings for our Shared code.
+# Only generate the Swift bindings for our Shared code. Args can be passed to the script e.g. "--force" (default "").
 build-shared args="":
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -60,7 +71,7 @@ build-shared args="":
   # Generate library for all our compile targets.
   ./build-ios.sh {{ args }}
 
-# Sync the code to our Mobile Apps and update it.
+# Only sync the code to our Mobile Apps and update it.
 sync:
   #!/usr/bin/env bash
   set -euxo pipefail

@@ -1,10 +1,11 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
-import { devices } from '@playwright/test';
+import type { PlaywrightTestConfig } from "@playwright/test";
+import { devices } from "@playwright/test";
 
-const SERVER = `http://127.0.0.1:8080`;
+const PORT = 8954;
+const SERVER = `http://127.0.0.1:${8954}`;
 
 const config: PlaywrightTestConfig = {
-  testDir: './tests',
+  testDir: "./tests",
   // Maximum time one test can run for.
   timeout: 30 * 1000,
   expect: {
@@ -25,33 +26,33 @@ const config: PlaywrightTestConfig = {
   // Limit the number of failures on CI to save resources
   maxFailures: process.env.CI ? 10 : undefined,
 
-  reporter: 'html',
+  reporter: "html",
   use: {
     // Base URL to use in actions like `await page.goto('/')`.
     baseURL: SERVER,
     // Maximum time each action such as `click()` can take. Defaults to 0 (no limit).
     actionTimeout: 0,
     // Collect trace when retrying the failed test.
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
   },
 
   // Configure which browsers to test against.
   projects: [
     {
-      name: 'chromium',
+      name: "chromium",
       use: {
-        ...devices['Desktop Chrome'],
+        ...devices["Desktop Chrome"],
       },
     },
   ],
   webServer: {
-    command: 'just dev ui-internal',
+    command: `just dev ${PORT}`,
     // Set a timeout of 10 minutes.
     timeout: 10 * 60 * 1000,
     url: SERVER,
     reuseExistingServer: true,
-    stdout: 'ignore',
-    stderr: 'pipe',
+    stdout: "ignore",
+    stderr: "pipe",
   },
 };
 

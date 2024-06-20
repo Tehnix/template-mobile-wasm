@@ -7,29 +7,60 @@ After exploring multiple solutions to working with Rust on Mobile, this seems so
 - Support native Widgets using the generated XCode project and Swift
 - Use Rust code from Swift via [UniFFI](https://github.com/mozilla/uniffi-rs)
 
+We use [just](https://github.com/casey/just) to setup various commands in the `justfile` (`brew install just` to install it).
 
-In short, construct the shared code for all platforms (iOS, macOS, watchOS):
+You can run `just` to see all available commands and some helpful resources:
 
 ```bash
-just build-shared
+Available recipes:
+    build-shared args="" # Generate the Swift bindings for our Shared code.
+    build-web            # Build our Web App and sync the code to our Mobile Apps.
+    code                 # Open the VS Code project workspace.
+    dev                  # Run the local Web Development server.
+    help                 # Display help information.
+    install-tooling      # Setup the tooling needed for the project.
+    open                 # Open our Mobile project in XCode.
+    run                  # Run our Mobile App in a Simulator.
+    sync                 # Sync the code to our Mobile Apps and update it.
+
+Helpful resources:
+ - Capacitor Docs: https://capacitorjs.com/docs/ios
+ - Trunk Docs: https://trunkrs.dev
+ - Leptos Book: https://book.leptos.dev
+ - TailwindCSS Docs: https://tailwindcss.com/docs/installation
 ```
 
-Change the Leptos/WASM/Rust app, build the artifacts, and sync the changes with Capacitor:
+In short, install the necessary tooling (Capacitor, Trunk, Bun, Rust, dependencies, etc.):
 
 ```bash
+just install-tooling
+```
+
+Build everything:
+
+```bash
+just build
+```
+
+Or, build things individually.
+
+```bash
+# Build the Leptos/WASM/Rust app, and sync the changes with Capacitor
 just build-web
+# Construct the shared code for all platforms (iOS, macOS, watchOS)
+just build-shared
 ```
 
 Run it in a Simulator:
 
 ```bash
-just run
+just run # or: just run android
 ```
 
 Or open XCode
 
 ```bash
-just open
+just open # or: just open android
 ```
 
 ## Setting up Capacitor from scratch

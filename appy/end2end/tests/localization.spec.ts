@@ -6,7 +6,7 @@ test("localization translates text when changing language", async ({
   await page.goto("/");
   await expect(page.locator("h1")).toHaveText("🍽️");
 
-  await page.getByText("Go to fr").dblclick();
+  await page.getByText("Ready?").click();
   await expect(page.locator("h1")).toHaveText("🥐️");
 });
 
