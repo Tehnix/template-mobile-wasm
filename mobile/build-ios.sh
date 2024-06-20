@@ -40,7 +40,7 @@ done
 # Add homebrew items to path.
 export PATH="$HOME/.cargo/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
-# Change to this directory (by default we'll be in the XCode project directory)
+# Change to this directory (by default we'll be in the Xcode project directory)
 SCRIPT_PATH=$(dirname "$(realpath $0)")
 echo "$SCRIPT_PATH"
 cd "$SCRIPT_PATH"
@@ -49,7 +49,7 @@ CURRENT_HASH=$(cat target/build-hash.txt || echo "none")
 NEW_HASH=$(find ./src ../shared/src -type f -print0 | sort -z | xargs -0 sha1sum | sha1sum)
 
 # If nothing changed, we skip the build. This not only has a performance benefit,
-# but also stops XCode from getting stuck in a recompile loop, since it will see
+# but also stops Xcode from getting stuck in a recompile loop, since it will see
 # the file timestamps being updated by the build script, and will recompile things.
 if [[ "$FORCE_RUN" == "false" && "$CURRENT_HASH" == "$NEW_HASH" ]]; then
   echo "No changes detected, skipping build."
@@ -153,15 +153,15 @@ lipo -info target/iOS-sim/release/$LIBRARY_FILE.a
 rm ios/Shared.xcframework/ios-arm64-simulator/$LIBRARY_FILE.a
 cp target/iOS-sim/release/$LIBRARY_FILE.a ios/Shared.xcframework/ios-arm64-simulator/$LIBRARY_FILE.a
 
-# Finally, copy the Swift bindings into the XCode project which also updates the
-# checksums in XCode.
+# Finally, copy the Swift bindings into the Xcode project which also updates the
+# checksums in Xcode.
 rm -rf "$IOS_PROJECT/Generated/Shared.xcframework" || echo "No XCFramework to remove."
 cp -r "ios/Shared.xcframework" "$IOS_PROJECT/Generated/Shared.xcframework"
 rm -rf "$IOS_PROJECT/Generated/shared.swift" || echo "No shared.swift to remove."
 cp "bindings/${LIBRARY_NAME}.swift" "$IOS_PROJECT/Generated/shared.swift"
 
 # Done! No more steps since ./ios/Shared.xcframework and ./bindings/shared.swift are
-# linked into the XCode project using relative paths to this directory.
+# linked into the Xcode project using relative paths to this directory.
 
 # Update our build hash to skip unnecessary builds.
 echo "$NEW_HASH" >target/build-hash.txt
