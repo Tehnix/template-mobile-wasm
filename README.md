@@ -97,7 +97,9 @@ And finally either open the Xcode project `bunx cap ios open` or run it directly
 
 ## Setting up UniFFI from scratch
 
-While everything is handled by the `./mobile/build-ios.sh` script it might be nice to get an overview of what's going on (if you're doing this yourself from scratch, I recommend [this post](https://forgen.tech/en/blog/post/building-an-ios-app-with-rust-using-uniffi)).
+While everything is handled by the `./mobile/build-ios.sh` script it might be nice to get an overview of what's going on (if you're doing this yourself from scratch, I recommend [this post](https://forgen.tech/en/blog/post/building-an-ios-app-with-rust-using-uniffi)) (and [this for Android](https://forgen.tech/en/blog/post/building-an-android-app-with-rust-using-uniffi)).
+
+> NOTE: We also support Android but you'll need to have downloaded the [NDK](https://developer.android.com/studio/projects/install-ndk), and then you can run `just build-shared android`.
 
 We first build the binary for generating our bindings, and then use that to generate our bindings:
 

@@ -45,7 +45,7 @@ SCRIPT_PATH=$(dirname "$(realpath $0)")
 echo "$SCRIPT_PATH"
 cd "$SCRIPT_PATH"
 
-CURRENT_HASH=$(cat target/build-hash.txt || echo "none")
+CURRENT_HASH=$(cat target/build-hash-ios.txt || echo "none")
 NEW_HASH=$(find ./src ../shared/src -type f -print0 | sort -z | xargs -0 sha1sum | sha1sum)
 
 # If nothing changed, we skip the build. This not only has a performance benefit,
@@ -164,6 +164,6 @@ cp "bindings/${LIBRARY_NAME}.swift" "$IOS_PROJECT/Generated/shared.swift"
 # linked into the Xcode project using relative paths to this directory.
 
 # Update our build hash to skip unnecessary builds.
-echo "$NEW_HASH" >target/build-hash.txt
+echo "$NEW_HASH" >target/build-hash-ios.txt
 
 echo "Done!"

@@ -17,6 +17,8 @@ install-tooling:
   command -v cargo-binstall >/dev/null 2>&1 || curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
   # Install trunk for building Rust WebAssembly.
   command -v trunk >/dev/null 2>&1 || cargo binstall --no-confirm trunk
+  # Install cargo-ndk for generating Android JNI files.
+  command -v cargo-ndk >/dev/null 2>&1 || cargo binstall --no-confirm cargo-ndk
   # Install leptosfmt for formatting Leptos View macros.
   command -v leptosfmt >/dev/null 2>&1 || cargo binstall --no-confirm leptosfmt
   # Install cargo-edit for managing dependencies.
@@ -66,13 +68,13 @@ build-web:
   # Sync the files to our Mobile projects.
   bunx cap sync
 
-# Only generate the Swift bindings for our Shared code. Args can be passed to the script e.g. "--force" (default "").
-build-shared args="":
+# Only generate the Swift bindings for our Shared code. Platform can be "ios" or "android" (default "ios"). Args can be passed to the script e.g. "--force" (default "").
+build-shared platform="ios" args="":
   #!/usr/bin/env bash
   set -euxo pipefail
   cd mobile
   # Generate library for all our compile targets.
-  ./build-ios.sh {{ args }}
+  ./build-{{ platform }}.sh {{ args }}
 
 # Only sync the code to our Mobile Apps and update it.
 sync:
