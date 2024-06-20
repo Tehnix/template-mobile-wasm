@@ -49,7 +49,7 @@ test +tests="":
   cd appy/end2end && bun run e2e {{ tests }}
 
 # Build our Web App, Shared code, and sync the changes to our Mobile Apps.
-just build:
+build:
   @ just build-web
   @ just build-shared
 

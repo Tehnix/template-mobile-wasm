@@ -9,19 +9,21 @@ After exploring multiple solutions to working with Rust on Mobile, this seems so
 
 We use [just](https://github.com/casey/just) to setup various commands in the `justfile` (`brew install just` to install it).
 
-You can run `just` to see all available commands and some helpful resources:
+You can run `just` or `just help` to see all available commands and some helpful resources:
 
 ```bash
 Available recipes:
-    build-shared args="" # Generate the Swift bindings for our Shared code.
-    build-web            # Build our Web App and sync the code to our Mobile Apps.
+    build                # Build our Web App, Shared code, and sync the changes to our Mobile Apps.
+    build-shared args="" # Only generate the Swift bindings for our Shared code. Args can be passed to the script e.g. "--force" (default "").
+    build-web            # Only build our Web App and sync the code to our Mobile Apps.
     code                 # Open the VS Code project workspace.
-    dev                  # Run the local Web Development server.
+    dev port="8080"      # Run the local Web Development server on the port.
     help                 # Display help information.
     install-tooling      # Setup the tooling needed for the project.
-    open                 # Open our Mobile project in XCode.
-    run                  # Run our Mobile App in a Simulator.
-    sync                 # Sync the code to our Mobile Apps and update it.
+    open platform="ios"  # Open our Mobile project in XCode. Platform can be "ios" or "android" (default "ios").
+    run platform="ios"   # Run our Mobile App in a Simulator. Platform can be "ios" or "android" (default "ios").
+    sync                 # Only sync the code to our Mobile Apps and update it.
+    test +tests=""       # Run end-to-end tests. Tests can be omitted for all, or a specific test name (default "").
 
 Helpful resources:
  - Capacitor Docs: https://capacitorjs.com/docs/ios
