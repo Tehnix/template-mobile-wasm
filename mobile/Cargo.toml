@@ -16,7 +16,8 @@ lto = true      # Enable Link Time Optimization.
 strip = true    # Automatically strip symbols from the binary.
 panic = "abort"
 debug = false
-# codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization.
+# Disable this if compile times are too long.
+codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization.
 
 [patch.crates-io]
 # We patch in our shared code to allow it to live independently of the appy crate

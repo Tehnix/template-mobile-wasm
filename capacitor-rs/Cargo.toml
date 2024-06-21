@@ -1,0 +1,11 @@
+[package]
+name = "capacitor-rs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Match Trunk's wasm-bindgen version for compatability.
+wasm-bindgen = { version = "=0.2.87" }
+# Used for working with async/promises in JS.
+wasm-bindgen-futures = { version = "0.4" }
+js-sys = { version = "0.3" }

@@ -10,7 +10,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@capacitor/browser": "^6.0.1",
     "@capacitor/core": "^6.1.0",
+    "@capacitor/haptics": "^6.0.0",
     "@capacitor/ios": "^6.1.0"
   }
 }

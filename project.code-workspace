@@ -9,6 +9,10 @@
       "path": "appy"
     },
     {
+      "name": "capacitor-rs",
+      "path": "capacitor-rs"
+    },
+    {
       "name": "shared",
       "path": "shared"
     },
@@ -32,6 +36,7 @@
       "**/.vscode": false,
       ".github": true,
       "appy": true,
+      "capacitor-rs": true,
       "shared": true,
       "mobile": true
     },

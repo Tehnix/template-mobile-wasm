@@ -29,6 +29,8 @@ install-tooling:
   cd appy && bun install
   # Install test dependencies.
   cd appy/end2end && bun install
+  # Install capacitor-rs dependencies.
+  cd capacitor-rs && bun install
   @ echo "\n\nIf you don't have it already, you need to install Xcode and Android Studio for the Mobile Apps."
   @ echo "  - Xcode: https://developer.apple.com/xcode/"
   @ echo "  - Android Studio: https://developer.android.com/studio"
@@ -57,6 +59,13 @@ test +tests="":
 build:
   @ just build-web
   @ just build-shared
+
+# Only bundle the Capacitor JavaScript plugin files.
+build-plugins:
+  #!/usr/bin/env bash
+  set -euxo pipefail
+  cd capacitor-rs
+  bun run build
 
 # Only build our Web App and sync the code to our Mobile Apps.
 build-web:

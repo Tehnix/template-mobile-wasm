@@ -1,10 +1,20 @@
 [workspace]
-members = ["appy"]
+members = ["appy", "capacitor-rs"]
 edition = "2021"
 resolver = "2"
 # Ignore the mobile crate which is only used to generate bindings to Swift, and
 # the shared crate which is shared between both.
 exclude = ["mobile", "shared"]
+
+# Optimize for WASM binary size:
+# - https://doc.rust-lang.org/cargo/reference/profiles.html#default-profiles
+# - https://github.com/johnthagen/min-sized-rust
+[profile.release]
+opt-level = 'z'   # Optimize for size.
+lto = true        # Enable Link Time Optimization.
+codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization.
+strip = true      # Automatically strip symbols from the binary.
+debug = false
 
 [patch.crates-io]
 # We patch in our shared code to allow it to live independently of the appy crate

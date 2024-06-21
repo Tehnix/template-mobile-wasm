@@ -1,0 +1,19 @@
+{
+  "name": "capacitor-wrapper",
+  "module": "js/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build --target browser --minify --outdir js-dist js/**"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@capacitor/browser": "6.0.1",
+    "@capacitor/core": "6.1.0",
+    "@capacitor/haptics": "6.0.0"
+  }
+}

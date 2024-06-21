@@ -9,17 +9,8 @@ default = "en"
 locales = ["en", "fr"]
 locales-dir = "./messages"
 
-# Optimize for WASM binary size:
-# - https://doc.rust-lang.org/cargo/reference/profiles.html#default-profiles
-# - https://github.com/johnthagen/min-sized-rust
-[profile.release]
-opt-level = 'z'   # Optimize for size.
-lto = true        # Enable Link Time Optimization.
-codegen-units = 1 # Reduce Parallel Code Generation Units to Increase Optimization.
-strip = true      # Automatically strip symbols from the binary.
-debug = false
-
 [dependencies]
+capacitor-rs = { version = "0.1.0", path = "../capacitor-rs" }
 # Our local dependencies (NOTE: we don't need the path since it's patched in).
 shared = { version = "0.1.0" }
 

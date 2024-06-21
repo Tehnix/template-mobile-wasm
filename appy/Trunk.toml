@@ -1,3 +1,16 @@
+[watch]
+watch = [
+  # Watch for changes in the App folder.
+  "./src",
+  "./messages",
+  "./public",
+  "./Cargo.toml",
+  # Watch for changes in the capacitor-rs folder.
+  "../capacitor-rs/src",
+  "../capacitor-rs/js",
+]
+
+
 [[hooks]]
 stage = "pre_build"
 command = "sh"
@@ -5,3 +18,8 @@ command_arguments = [
   "-c",
   "bunx tailwindcss --input resources/input.css --output public/output.css",
 ]
+
+[[hooks]]
+stage = "pre_build"
+command = "sh"
+command_arguments = ["-c", "just build-plugins"]
