@@ -1,9 +1,12 @@
-# Rust on Mobile via Capacitor
+# Mobile: Rust on Mobile
+
+> This is a template project for building a Rust application that can be run on Web, iOS and Android using Leptos, Capacitor and UniFFI.
 
 After exploring multiple solutions to working with Rust on Mobile, this seems so far to be the best option:
 
 - Compile to WASM via Rust and a framework such as Leptos
 - Package WASM using [Capacitor](https://capacitorjs.com/docs)
+- Interface with [Capacitor Plugins](https://capacitorjs.com/docs/plugins)
 - Support native Widgets using the generated Xcode project and Swift
 - Use Rust code from Swift via [UniFFI](https://github.com/mozilla/uniffi-rs)
 
@@ -13,17 +16,18 @@ You can run `just` or `just help` to see all available commands and some helpful
 
 ```bash
 Available recipes:
-    build                # Build our Web App, Shared code, and sync the changes to our Mobile Apps.
-    build-shared args="" # Only generate the Swift bindings for our Shared code. Args can be passed to the script e.g. "--force" (default "").
-    build-web            # Only build our Web App and sync the code to our Mobile Apps.
-    code                 # Open the VS Code project workspace.
-    dev port="8080"      # Run the local Web Development server on the port.
-    help                 # Display help information.
-    install-tooling      # Setup the tooling needed for the project.
-    open platform="ios"  # Open our Mobile project in Xcode. Platform can be "ios" or "android" (default "ios").
-    run platform="ios"   # Run our Mobile App in a Simulator. Platform can be "ios" or "android" (default "ios").
-    sync                 # Only sync the code to our Mobile Apps and update it.
-    test +tests=""       # Run end-to-end tests. Tests can be omitted for all, or a specific test name (default "").
+    build               # Build our Web App, Shared code, and sync the changes to our Mobile Apps.
+    build-plugins       # Only bundle the Capacitor JavaScript plugin files.
+    build-shared platform="ios" args="" # Only generate the Swift bindings for our Shared code. Platform can be "ios" or "android" (default "ios"). Args can be passed to the script e.g. "--force" (default "").
+    build-web           # Only build our Web App and sync the code to our Mobile Apps.
+    code                # Open the VS Code project workspace.
+    dev port="8080"     # Run the local Web Development server on the port.
+    help                # Display help information.
+    install-tooling     # Setup the tooling needed for the project.
+    open platform="ios" # Open our Mobile project in Xcode. Platform can be "ios" or "android" (default "ios").
+    run platform="ios"  # Run our Mobile App in a Simulator. Platform can be "ios" or "android" (default "ios").
+    sync                # Only sync the code to our Mobile Apps and update it.
+    test +tests=""      # Run end-to-end tests. Tests can be omitted for all, or a specific test name (default "").
 
 Helpful resources:
  - Capacitor Docs: https://capacitorjs.com/docs/ios
