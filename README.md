@@ -10,6 +10,14 @@ After exploring multiple solutions to working with Rust on Mobile, this seems so
 - Support native Widgets using the generated Xcode project and Swift
 - Use Rust code from Swift via [UniFFI](https://github.com/mozilla/uniffi-rs)
 
+So that's exactly what I've set up in this repository, ready to use:
+
+- `appy`: A Rust/Leptos/WASM Frontend, with i18n, TailwindCSS, and CapacitorJS set up
+  - We've added setup for Android, iOS, iOS Widgets, watchOS, and macOS (via the iOS App)
+- `shared`: Code that is shared between `appy` and the `mobile` crate
+- `capacitor-rs`: Exposing bindings to the Capacitor JavaScript library, so we can use it in Rust
+- `mobile`: Pulls in and reexports `shared` to generate UniFFI bindings for Swift + Kotlin
+
 We use [just](https://github.com/casey/just) to setup various commands in the `justfile` (`brew install just` to install it).
 
 You can run `just` or `just help` to see all available commands and some helpful resources:
