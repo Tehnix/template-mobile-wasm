@@ -2,6 +2,12 @@
 
 > This is a template project for building a Rust application that can be run on Web, iOS and Android using Leptos, Capacitor and UniFFI.
 
+For a detailed write-up on how we got here and what this is, check out the following articles:
+
+- [Mobile: A different way using Rust?](https://medium.com/@codethoughts/mobile-a-different-way-using-rust-0e7b1dfa8cbf)
+- [Using Capacitor Plugins from Rust/WASM](https://codethoughts.medium.com/using-capacitor-plugins-from-rust-wasm-0df85703f9d8)
+- [Setting up UniFFI for iOS, Simulators, and watchOS](https://codethoughts.medium.com/setting-up-uniffi-for-ios-simulators-and-watchos-e2b08bafac4a)
+
 After exploring multiple solutions to working with Rust on Mobile, this seems so far to be the best option:
 
 - Compile to WASM via Rust and a framework such as Leptos
